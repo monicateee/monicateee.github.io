@@ -3,409 +3,392 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monica Teeling - Graphic Designer</title>
-    <meta name="description" content="Professional graphic designer specializing in modern, clean design solutions">
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="styles.css">
-    
-    <!-- AOS Animation Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <title>Monica Teeling CV and Folio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            overflow: hidden;
+        }
+
+        .pdf-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #333;
+        }
+
+        .pdf-viewer {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background-color: white;
+            overflow: hidden;
+        }
+
+        .pdf-page {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .navigation {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            pointer-events: none;
+        }
+
+        .nav-button {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #333;
+            transition: all 0.3s ease;
+            pointer-events: all;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-button:hover {
+            background-color: white;
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .page-info {
+            display: none;
+        }
+
+        .loading {
+            display: none;
+        }
+
+        .error {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ff6b6b;
+            font-size: 18px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .keyboard-hint {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .contact-page {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            z-index: 10;
+            transform: translateX(100%);
+            transition: transform 0.5s ease;
+        }
+
+        .contact-page.show {
+            transform: translateX(0);
+        }
+
+        .contact-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.2rem;
+            padding: 1rem 2rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+        }
+
+        .contact-item:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+    </style>
 </head>
 <body>
-    <!-- Background Animation Container -->
-    <div class="bg-animation">
-        <!-- Floating Geometric Shapes -->
-        <div class="floating-shapes">
-            <div class="floating-shape"></div>
-            <div class="floating-shape"></div>
-            <div class="floating-shape"></div>
-            <div class="floating-shape"></div>
-            <div class="floating-shape"></div>
-            <div class="floating-shape"></div>
-        </div>
-        
-        <!-- Particle System -->
-        <div class="particles">
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-        </div>
-        
-        <!-- Animated Grid Overlay -->
-        <div class="grid-overlay"></div>
-        
-        <!-- Ambient Glow Effects -->
-        <div class="ambient-glow"></div>
-    </div>
+    <div class="pdf-container">
 
-    <!-- Header -->
-    <header class="header" id="header">
-        <div class="container">
-            <div class="nav-brand">
-                <h1>Monica Teeling</h1>
-                <span class="nav-title">Graphic Designer</span>
-            </div>
-            <nav class="nav" role="navigation" aria-label="Main navigation">
-                <ul class="nav-list">
-                    <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
-                    <li><a href="#about" class="nav-link">About</a></li>
-                    <li><a href="#employment" class="nav-link">Employment</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
-                </ul>
-            </nav>
-            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
+        <div class="error" id="error" style="display: none;"></div>
+        
+        <div class="pdf-viewer" id="pdfViewer" style="display: none;">
+            <canvas id="pdfCanvas" class="pdf-page"></canvas>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-button" id="prevBtn" onclick="previousPage()" disabled>
+                ‹
+            </button>
+            <button class="nav-button" id="nextBtn" onclick="nextPage()">
+                ›
             </button>
         </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <div class="hero-background">
-            <svg class="hero-animation" viewBox="0 0 1200 800">
-                <defs>
-                    <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#6366f1;stop-opacity:0.3" />
-                        <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:0.1" />
-                    </linearGradient>
-                </defs>
-                <g class="animated-lines">
-                    <path d="M0,400 Q300,200 600,400 T1200,400" stroke="url(#lineGradient)" stroke-width="2" fill="none" />
-                    <path d="M0,450 Q400,250 800,450 T1200,450" stroke="url(#lineGradient)" stroke-width="1.5" fill="none" />
-                    <path d="M0,350 Q200,150 400,350 T800,350 T1200,350" stroke="url(#lineGradient)" stroke-width="1" fill="none" />
-                </g>
-            </svg>
-        </div>
-        <div class="hero-content">
-            <h2 class="hero-tagline" data-aos="fade-up" data-aos-delay="200">
-                Lorem ipsum<br>
-                <span class="hero-highlight">dolor sit amet</span>
-            </h2>
-            <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="400">
-                Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-            </p>
-            <a href="#portfolio" class="hero-cta" data-aos="fade-up" data-aos-delay="600">
-                View My Work
+
+        <div class="keyboard-hint">Use ← → arrow keys to navigate</div>
+    </div>
+
+    <!-- Contact Page -->
+    <div class="contact-page" id="contactPage">
+        <button class="back-button" onclick="hideContactPage()">← Back to Portfolio</button>
+        <h1 class="contact-title">Contact Me!</h1>
+        <div class="contact-info">
+            <a href="mailto:Monica.teeling09@gmail.com" class="contact-item">
+                <span class="contact-icon">📧</span>
+                <span>Monica.teeling09@gmail.com</span>
             </a>
-        </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section class="portfolio" id="portfolio">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Featured Work</h2>
-            <div class="portfolio-grid">
-                <article class="portfolio-item" data-aos="fade-up" data-aos-delay="100">
-                    <div class="portfolio-image">
-                        <img src="https://via.placeholder.com/600x400/1a1a1a/6366f1?text=Lorem+Ipsum" alt="Lorem Ipsum Project" loading="lazy">
-                        <div class="portfolio-overlay">
-                            <h3>Lorem Ipsum Dolor</h3>
-                            <span class="portfolio-category">Branding</span>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="portfolio-item" data-aos="fade-up" data-aos-delay="200">
-                    <div class="portfolio-image">
-                        <img src="https://via.placeholder.com/600x400/1a1a1a/8b5cf6?text=Consectetur+Adipiscing" alt="Consectetur Adipiscing Project" loading="lazy">
-                        <div class="portfolio-overlay">
-                            <h3>Consectetur Adipiscing</h3>
-                            <span class="portfolio-category">Web Design</span>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="portfolio-item" data-aos="fade-up" data-aos-delay="300">
-                    <div class="portfolio-image">
-                        <img src="https://via.placeholder.com/600x400/1a1a1a/ec4899?text=Sed+Do+Eiusmod" alt="Sed Do Eiusmod Project" loading="lazy">
-                        <div class="portfolio-overlay">
-                            <h3>Sed Do Eiusmod</h3>
-                            <span class="portfolio-category">Print Design</span>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="portfolio-item" data-aos="fade-up" data-aos-delay="400">
-                    <div class="portfolio-image">
-                        <img src="https://via.placeholder.com/600x400/1a1a1a/06b6d4?text=Tempor+Incididunt" alt="Tempor Incididunt Project" loading="lazy">
-                        <div class="portfolio-overlay">
-                            <h3>Tempor Incididunt</h3>
-                            <span class="portfolio-category">Logo Design</span>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="portfolio-item" data-aos="fade-up" data-aos-delay="500">
-                    <div class="portfolio-image">
-                        <img src="https://via.placeholder.com/600x400/1a1a1a/10b981?text=Ut+Labore+Et" alt="Ut Labore Et Project" loading="lazy">
-                        <div class="portfolio-overlay">
-                            <h3>Ut Labore Et</h3>
-                            <span class="portfolio-category">Packaging</span>
-                        </div>
-                    </div>
-                </article>
-                
-                <article class="portfolio-item" data-aos="fade-up" data-aos-delay="600">
-                    <div class="portfolio-image">
-                        <img src="https://via.placeholder.com/600x400/1a1a1a/f59e0b?text=Dolore+Magna" alt="Dolore Magna Project" loading="lazy">
-                        <div class="portfolio-overlay">
-                            <h3>Dolore Magna</h3>
-                            <span class="portfolio-category">Illustration</span>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text" data-aos="fade-right">
-                    <h2 class="section-title">About Me</h2>
-                    <p class="about-description">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-                        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea 
-                        commodo consequat duis aute irure dolor.
-                    </p>
-                    <p class="about-description">
-                        Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim 
-                        ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut 
-                        aliquip ex ea commodo consequat.
-                    </p>
-                </div>
-                <div class="about-image" data-aos="fade-left">
-                    <img src="https://via.placeholder.com/400x400/1a1a1a/6366f1?text=Monica+T" alt="Monica Teeling - Graphic Designer" loading="lazy">
-                </div>
-            </div>
-            
-            <div class="skills" data-aos="fade-up" data-aos-delay="200">
-                <h3 class="skills-title">Skills & Tools</h3>
-                <div class="skills-grid">
-                    <div class="skill-item">
-                        <div class="skill-icon">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 2L2 7L12 12L22 7L12 2Z" />
-                                <polyline points="2,17 12,22 22,17" />
-                                <polyline points="2,12 12,17 22,12" />
-                            </svg>
-                        </div>
-                        <span>Adobe Illustrator</span>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                                <circle cx="9" cy="9" r="2" />
-                                <path d="M21 15L16 10L5 21" />
-                            </svg>
-                        </div>
-                        <span>Adobe Photoshop</span>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5" />
-                            </svg>
-                        </div>
-                        <span>Figma</span>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-                                <line x1="8" y1="21" x2="16" y2="21" />
-                                <line x1="12" y1="17" x2="12" y2="21" />
-                            </svg>
-                        </div>
-                        <span>Web Design</span>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M14 2H6A2 2 0 0 0 4 4V20A2 2 0 0 0 6 22H18A2 2 0 0 0 20 20V8L14 2Z" />
-                                <polyline points="14,2 14,8 20,8" />
-                            </svg>
-                        </div>
-                        <span>Print Design</span>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-icon">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <circle cx="12" cy="12" r="3" />
-                                <path d="M19.4 15A1.65 1.65 0 0 0 21 13.35A1.65 1.65 0 0 0 19.4 11.65L19 11.74A7.81 7.81 0 0 0 12 4A7.81 7.81 0 0 0 5 11.74L4.6 11.65A1.65 1.65 0 0 0 3 13.35A1.65 1.65 0 0 0 4.6 15L5 14.91A7.81 7.81 0 0 0 12 20A7.81 7.81 0 0 0 19 14.91Z" />
-                            </svg>
-                        </div>
-                        <span>Branding</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Employment Section -->
-    <section class="employment" id="employment">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Employment History</h2>
-            <div class="timeline">
-                <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Lorem Ipsum Designer</h3>
-                        <div class="timeline-company">Consectetur Adipiscing Co.</div>
-                        <div class="timeline-period">2021 - Present</div>
-                        <p class="timeline-description">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-                            veniam, quis nostrud exercitation ullamco laboris.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Sed Do Eiusmod</h3>
-                        <div class="timeline-company">Tempor Incididunt Ltd.</div>
-                        <div class="timeline-period">2019 - 2021</div>
-                        <p class="timeline-description">
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum 
-                            dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non 
-                            proident, sunt in culpa qui officia deserunt.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Ut Enim Designer</h3>
-                        <div class="timeline-company">Ad Minim Veniam Inc.</div>
-                        <div class="timeline-period">2018 - 2019</div>
-                        <p class="timeline-description">
-                            Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo 
-                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit 
-                            esse cillum dolore eu fugiat nulla pariatur.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item" data-aos="fade-up" data-aos-delay="400">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Dolore Magna Intern</h3>
-                        <div class="timeline-company">Aliqua Design Studio</div>
-                        <div class="timeline-period">2017 - 2018</div>
-                        <p class="timeline-description">
-                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui 
-                            officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde 
-                            omnis iste natus error sit voluptatem.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Lorem Ipsum Dolor</h2>
-            <div class="contact-content">
-                <div class="contact-form-wrapper" data-aos="fade-right">
-                    <form class="contact-form" id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required aria-describedby="name-error">
-                            <span class="form-error" id="name-error"></span>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required aria-describedby="email-error">
-                            <span class="form-error" id="email-error"></span>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required aria-describedby="message-error"></textarea>
-                            <span class="form-error" id="message-error"></span>
-                        </div>
-                        <button type="submit" class="btn-submit">
-                            <span>Send Message</span>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="22" y1="2" x2="11" y2="13"></line>
-                                <polygon points="22,2 15,22 11,13 2,9"></polygon>
-                            </svg>
-                        </button>
-                    </form>
-                </div>
-                
-                <div class="contact-info" data-aos="fade-left">
-                    <div class="social-links">
-                        <h3>Connect With Me</h3>
-                        <div class="social-grid">
-
-                            <a href="https://linkedin.com" class="social-link" aria-label="LinkedIn Profile">
-                                <svg viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M16 8A6 6 0 0 1 22 14V21H18V14A2 2 0 0 0 16 12A2 2 0 0 0 14 14V21H10V9H14V11A4 4 0 0 1 16 8ZM6 9H2V21H6V9ZM4 6A2 2 0 1 1 4 2A2 2 0 0 1 4 6Z"></path>
-                                </svg>
-                                <span>LinkedIn</span>
-                            </a>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Modal -->
-    <div class="modal" id="portfolioModal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
-        <div class="modal-content">
-            <button class="modal-close" aria-label="Close modal">&times;</button>
-            <div class="modal-header">
-                <h3 id="modal-title"></h3>
-                <span class="modal-category"></span>
-            </div>
-            <div class="modal-body">
-                <div class="modal-image">
-                    <img id="modal-img" src="" alt="" loading="lazy">
-                </div>
-                <div class="modal-details">
-                    <div class="modal-description">
-                        <h4>Project Description</h4>
-                        <p id="modal-desc"></p>
-                    </div>
-                    <div class="modal-tools">
-                        <h4>Tools Used</h4>
-                        <div class="modal-tools-list" id="modal-tools"></div>
-                    </div>
-                </div>
-            </div>
+            <a href="https://wa.me/447772781369" class="contact-item">
+                <span class="contact-icon">📱</span>
+                <span>07772781369</span>
+            </a>
+            <a href="https://www.instagram.com/montee.graphics" class="contact-item">
+                <span class="contact-icon">📸</span>
+                <span>@montee.graphics</span>
+            </a>
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="script.js"></script>
+    <script>
+        // Set up PDF.js worker
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        let pdfDoc = null;
+        let pageNum = 1;
+        let pageRendering = false;
+        let pageNumPending = null;
+        const scale = 1.5;
+        const canvas = document.getElementById('pdfCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Load the PDF
+        async function loadPDF() {
+            try {
+                const loadingTask = pdfjsLib.getDocument('Monica Teeling CV and Folio.pdf');
+                pdfDoc = await loadingTask.promise;
+                
+                document.getElementById('pdfViewer').style.display = 'block';
+                
+                // Render the first page
+                renderPage(pageNum);
+            } catch (error) {
+                console.error('Error loading PDF:', error);
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('error').textContent = 'Error loading PDF. Please make sure the file exists.';
+            }
+        }
+
+        function renderPage(num) {
+            pageRendering = true;
+            
+            pdfDoc.getPage(num).then(function(page) {
+                const viewport = page.getViewport({scale: scale});
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                const renderContext = {
+                    canvasContext: ctx,
+                    viewport: viewport
+                };
+                
+                const renderTask = page.render(renderContext);
+
+                renderTask.promise.then(function() {
+                    pageRendering = false;
+                    if (pageNumPending !== null) {
+                        renderPage(pageNumPending);
+                        pageNumPending = null;
+                    }
+                });
+            });
+
+            updateNavigationButtons();
+        }
+
+        function queueRenderPage(num) {
+            if (pageRendering) {
+                pageNumPending = num;
+            } else {
+                renderPage(num);
+            }
+        }
+
+        function previousPage() {
+            if (pageNum <= 1) {
+                return;
+            }
+            pageNum--;
+            queueRenderPage(pageNum);
+        }
+
+        function nextPage() {
+            if (pageNum >= pdfDoc.numPages) {
+                return;
+            }
+            pageNum++;
+            queueRenderPage(pageNum);
+        }
+
+
+
+        function updateNavigationButtons() {
+            document.getElementById('prevBtn').disabled = pageNum <= 1;
+            
+            // On the last page, change the next button to show contact
+            if (pageNum >= pdfDoc.numPages) {
+                document.getElementById('nextBtn').textContent = '📞';
+                document.getElementById('nextBtn').onclick = showContactPage;
+            } else {
+                document.getElementById('nextBtn').textContent = '›';
+                document.getElementById('nextBtn').onclick = nextPage;
+            }
+        }
+
+        function showContactPage() {
+            document.getElementById('contactPage').classList.add('show');
+        }
+
+        function hideContactPage() {
+            document.getElementById('contactPage').classList.remove('show');
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                previousPage();
+            } else if (e.key === 'ArrowRight') {
+                if (pageNum >= pdfDoc.numPages) {
+                    showContactPage();
+                } else {
+                    nextPage();
+                }
+            } else if (e.key === 'Escape') {
+                hideContactPage();
+            }
+        });
+
+        // Touch/swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Swipe left - next page or contact
+                    if (pageNum >= pdfDoc.numPages) {
+                        showContactPage();
+                    } else {
+                        nextPage();
+                    }
+                } else {
+                    // Swipe right - previous page
+                    previousPage();
+                }
+            }
+        }
+
+        // Load the PDF when the page loads
+        window.addEventListener('load', loadPDF);
+    </script>
 </body>
-</html>
+</html> 
